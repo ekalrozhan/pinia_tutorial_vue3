@@ -7,5 +7,19 @@ export const useTaskStore = defineStore('taskStore', {
             {id:2, title: 'Learn Pinia', isFav: false}
         ],
     //    name: 'Haikal'
-    })
+    }),
+
+    getters: {
+        favs() {
+            return this.tasks.filter(t => t.isFav)
+        },
+        favCount(){
+            return this.tasks.reduce((p, c) => {
+                return c.isFav? p + 1 : p
+            }, 0)
+        },
+        totalCount: (state) => {
+            return state.tasks.length
+        }
+    }
 })
